@@ -1,20 +1,9 @@
 pipeline {
-    agent any
+    agent { label 'linux-agent' }
     stages {
-        stage('Test Docker') {
+        stage('Test Curl') {
             steps {
-                sh 'docker --version'
-                sh 'docker ps'
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t my-nginx-app .'
-            }
-        }
-        stage('Run Container') {
-            steps {
-                sh 'docker run -d -p 8081:80 --name my-nginx-app my-nginx-app'
+                sh 'curl http://10.255.255.254:8081'
             }
         }
     }
